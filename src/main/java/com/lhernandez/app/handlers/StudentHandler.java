@@ -32,7 +32,11 @@ public class StudentHandler {
 	}
 	
 	public ResponseEntity<Optional<StudentDto>> getStudentById(String id){
-		
-		return null;
+		return service.getStudentById(id)
+				.map(s->{
+					return Optional.of(mapper.ModeltoDto(s));
+				})
+		        .map(ResponseEntity::ok)
+		        .orElseGet(() -> ResponseEntity.notFound().build());
 	}
 }
