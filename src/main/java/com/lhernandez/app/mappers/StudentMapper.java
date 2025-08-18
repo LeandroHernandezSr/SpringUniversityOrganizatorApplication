@@ -3,6 +3,7 @@ package com.lhernandez.app.mappers;
 
 import org.springframework.stereotype.Component;
 
+import com.lhernandez.app.dto.StudentDto;
 import com.lhernandez.app.entities.StudentEntity;
 import com.lhernandez.app.models.person.Student;
 
@@ -40,5 +41,29 @@ public class StudentMapper {
 		studentEntity.setSubjects(student.getSubjects().stream().map(subjectMapper::toEntity).toList());
 		studentEntity.setTests(student.getTests().stream().map(testMapper::toEntity).toList());
 		return studentEntity;
+	}
+	
+	public StudentDto ModeltoDto(Student student) {
+		StudentDto dto=new StudentDto();
+		dto.setEmail(student.getEmail());
+		dto.setId(student.getId());
+		dto.setLastName(student.getLastName());
+		dto.setName(student.getName());
+		dto.setPassword(student.getPassword());
+		dto.setSubjects(student.getSubjects().stream().map(subjectMapper::modelToDto).toList());
+		dto.setTests(student.getTests().stream().map(testMapper::ModelToDto).toList());
+		return dto;
+	}
+	
+	public Student DtoToModel(StudentDto dto) {
+		Student student=new Student();
+		student.setEmail(dto.getEmail());
+		student.setId(dto.getId());
+		student.setLastName(dto.getLastName());
+		student.setName(dto.getLastName());
+		student.setPassword(dto.getPassword());
+		student.setSubjects(dto.getSubjects().stream().map(subjectMapper::dtoToModel).toList());
+		student.setTests(dto.getTests().stream().map(testMapper::dtoToModel).toList());
+		return student;
 	}
 }

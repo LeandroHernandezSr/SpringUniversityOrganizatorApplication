@@ -2,6 +2,7 @@ package com.lhernandez.app.mappers;
 
 import org.springframework.stereotype.Component;
 
+import com.lhernandez.app.dto.TestDto;
 import com.lhernandez.app.entities.TestEntity;
 import com.lhernandez.app.models.test.Test;
 
@@ -34,4 +35,23 @@ public class TestMapper {
 		return testEntity;
 	}
 	
+	public Test dtoToModel(TestDto dto) {
+		Test test=new Test();
+		test.setDate(dto.getDate());
+		test.setId(dto.getId());
+		test.setName(dto.getName());
+		test.setPoints(dto.getPoints());
+		test.setSubject(subjectMapper.dtoToModel(dto.getSubject()));
+		return test;
+	}
+	
+	public TestDto ModelToDto(Test test) {
+		TestDto dto=new TestDto();
+		dto.setDate(test.getDate());
+		dto.setId(test.getId());
+		dto.setName(test.getName());
+		dto.setPoints(test.getPoints());
+		dto.setSubject(subjectMapper.modelToDto(test.getSubject()));
+		return dto;
+	}
 }
