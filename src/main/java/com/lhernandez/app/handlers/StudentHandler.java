@@ -2,8 +2,7 @@ package com.lhernandez.app.handlers;
 
 import java.util.Optional;
 
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Component;
 
 import com.lhernandez.app.dto.StudentDto;
@@ -21,22 +20,24 @@ public class StudentHandler {
 		this.mapper=mapper;
 	}
 	
-	public ResponseEntity<StudentDto>createStudent(StudentDto studentDto) {
-		var response=service.createStudent(mapper.DtoToModel(studentDto));
-		return ResponseEntity.status(200).body(mapper.ModeltoDto(response));
+	public Optional<StudentDto>createStudent(StudentDto studentDto) {
+		return Optional.of(studentDto)
+				.map(mapper::DtoToModel)
+				.map(service::createStudent)
+				.map(mapper::ModeltoDto);
 	}
 	
-	public ResponseEntity<Optional<StudentDto>>deleteStudent(StudentDto studentDto){
-		var response=service.deleteStudent(mapper.DtoToModel(studentDto));
-		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(response.map(mapper::ModeltoDto));
+	public Optional<StudentDto>deleteStudent(StudentDto studentDto){
+		return Optional.of(studentDto)
+				.map(mapper::DtoToModel)
+				.map(service::deleteStudent)
+				.get()
+				.map(mapper::ModeltoDto);
+				
 	}
 	
-	public ResponseEntity<Optional<StudentDto>> getStudentById(String id){
-		return service.getStudentById(id)
-				.map(s->{
-					return Optional.of(mapper.ModeltoDto(s));
-				})
-		        .map(ResponseEntity::ok)
-		        .orElseGet(() -> ResponseEntity.notFound().build());
+	public Optional<StudentDto> getStudentById(String id){
+		return this.service.getStudentById(id)
+				.map(mapper::ModeltoDto);
 	}
 }

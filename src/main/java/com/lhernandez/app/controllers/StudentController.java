@@ -1,9 +1,9 @@
 package com.lhernandez.app.controllers;
 
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lhernandez.app.dto.StudentDto;
@@ -20,8 +20,9 @@ public class StudentController {
 	}
 	
 	@PostMapping("/create")
-	public ResponseEntity<StudentDto> create(@RequestBody StudentDto dto){
-		return null;
+	public String create(@ModelAttribute StudentDto student){
+		this.handler.createStudent(student);
+		return "form";
 	}
 	
 }
