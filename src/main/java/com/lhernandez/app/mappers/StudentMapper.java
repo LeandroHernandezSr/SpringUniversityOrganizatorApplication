@@ -60,7 +60,7 @@ public class StudentMapper {
 		student.setEmail(dto.getEmail());
 		student.setId(dto.getId());
 		student.setLastName(dto.getLastName());
-		student.setName(dto.getLastName());
+		student.setName(dto.getName());
 		student.setPassword(dto.getPassword());
 		student.setSubjects(dto.getSubjects().stream().map(subjectMapper::dtoToModel).toList());
 		student.setTests(dto.getTests().stream().map(testMapper::dtoToModel).toList());
