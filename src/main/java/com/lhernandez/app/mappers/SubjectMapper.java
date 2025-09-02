@@ -20,7 +20,7 @@ public class SubjectMapper {
 	
 	public SubjectEntity toEntity(Subject subject) {
 		SubjectEntity subjectEntity=new SubjectEntity();
-		subject.setId(subject.getId());
+		subjectEntity.setId(subject.getId());
 		subjectEntity.setName(subject.getName());
 		subjectEntity.setPracticalDays(subject.getPracticalDays());
 		subjectEntity.setTheoricalDays(subject.getTheoricalDays());
