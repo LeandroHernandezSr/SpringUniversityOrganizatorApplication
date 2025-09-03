@@ -35,7 +35,7 @@ public class SubjectController {
     @PostMapping("/create")
     public String save(@ModelAttribute("subject") SubjectDto subject) {
         this.handler.create(subject);
-        return "redirect:/subject/form";
+        return "redirect:/subject/list";
     }
 
     @GetMapping("/list")

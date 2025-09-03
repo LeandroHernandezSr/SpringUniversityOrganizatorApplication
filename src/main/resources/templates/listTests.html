@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body style="background-color: rgb(60, 92, 156);">
+     <div class="container">
+        <table class="table">
+            <thead>
+                <tr class="text-center">
+                    <td>Name</td>
+                    <td>Date</td>
+                    <td>Points</td>
+                    <td>Subject</td>
+                    <td>Update</td>
+                    <td>Delete</td>
+                </tr>
+            </thead>
+            <tbody th:each="test : ${tests}" class="table-group-divider">
+                <tr>
+                    <td th:text="${test.name}" class="text-center"></td>
+                    <td th:text="${test.date}" class="text-center"></td>
+                    <td th:text="${test.points}" class="text-center"></td>
+                    <td th:text="${test.subject.name}" class="text-center"></td>
+                    <td class="text-center">
+                        <a th:text="X" th:value="${test.id}" class="btn btn-warning text-center mx-auto" th:href="@{/test/update/{id}(id=${test.id})}"></a>
+                    </td>
+                    <td class="text-center">
+                        <a th:text="X" th:value="${test.id}" class="btn btn-danger text-center" th:href="@{/test/delete/{id}(id=${test.id})}"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+</html>

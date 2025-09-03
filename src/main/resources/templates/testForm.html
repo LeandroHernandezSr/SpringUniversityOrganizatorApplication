@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body style="background-color: rgb(60, 92, 156);">
+    <h1 th:text="${title}" class="text-center"></h1>
+    <div class="container">
+        <form th:action="@{/test/create}" th:object="${test}" method="post">
+            <div>
+                <label for="name" th:text="Name"></label>
+                <div>
+                    <input type="text" name="name" id="name" th:field="*{name}" class="form-control">
+                </div>
+            </div>
+
+            <div>
+                <label for="date" th:text="Date"></label>
+                <div>
+                    <input type="date" name="date" id="date" th:field="*{date}" class="form-control">
+                </div>
+            </div>
+
+            <div>
+                <label for="points" th:text="Points"></label>
+                <div>
+                    <input type="number" name="points" id="points" th:field="*{points}" class="form-control">
+                </div>
+            </div>
+
+            <div>
+                <label th:text="Subject"></label>
+                <div>
+                    <select th:field="*{subject.id}" class="form-select">
+                        <option value="" disabled selected>-- Select a subject --</option>
+                        <option th:each="subject : ${subjects}" th:value="${subject.id}" th:text="${subject.name}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="py-2">
+                <input type="submit" value="Create" class="btn btn-primary">
+            </div>
+
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
