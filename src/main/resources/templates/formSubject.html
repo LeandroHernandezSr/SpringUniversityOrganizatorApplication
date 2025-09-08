@@ -13,42 +13,50 @@
 </head>
 
 <body style="background-color: rgb(60, 92, 156);">
-    <h1 th:text="${title}" class="text-center"></h1>
-    <div class="container">
-        <form th:action="@{/subject/create}" method="post" th:object="${subject}">
-            <input type="hidden" name="id" th:field="*{id}">
-            <div>
-                <label for="name">Name</label>
-                <div>
-                    <input type="text" id="name" th:field="*{name}" class="form-control">
-                </div>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <div class="container-fluid d-flex justify-content-center align-items-center vh-100 w-75">
+        <div class="card w-75">
+            <div class="card-header">
+                <h1 th:text="${title}"></h1>
             </div>
-
-            <div>
-                <label>Practical days</label>
-                <div class="card">
-                    <div th:each="day : ${daysEnum}" class="input-group mb-3">
-                        <input class="form-check-input" type="checkbox" th:value="${day}"
-                            th:field="*{practicalDays}" id="${day}"/>
-                        <label class="form-check-label" th:text="${day}" for="${day}"></label>
+            <div class="card-body">
+                <form th:action="@{/subject/create}" method="post" th:object="${subject}">
+                    <input type="hidden" name="id" th:field="*{id}">
+                    <div>
+                        <label for="name">Name</label>
+                        <div>
+                            <input type="text" id="name" th:field="*{name}" class="form-control">
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div>
-                <label>Theorical days</label>
-                <div class="card">
-                    <div th:each="day : ${daysEnum}">
-                        <input class="form-check-input" type="checkbox" th:value="${day}" th:field="*{theoricalDays}" />
-                        <label class="form-check-label" th:text="${day}" for="${day}"></label>
+                    <div>
+                        <label>Practical days</label>
+                        <div class="card">
+                            <div th:each="day : ${daysEnum}" class="input-group mb-3">
+                                <input class="form-check-input" type="checkbox" th:value="${day}"
+                                    th:field="*{practicalDays}" id="${day}" />
+                                <label class="form-check-label" th:text="${day}" for="${day}"></label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-           <div class="py-2">
-                <input type="submit" value="Create" class="btn btn-primary">
-           </div>
-        </form>
+                    <div>
+                        <label>Theorical days</label>
+                        <div class="card">
+                            <div th:each="day : ${daysEnum}">
+                                <input class="form-check-input" type="checkbox" th:value="${day}"
+                                    th:field="*{theoricalDays}" />
+                                <label class="form-check-label" th:text="${day}" for="${day}"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="py-2">
+                        <input type="submit" value="Create" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 

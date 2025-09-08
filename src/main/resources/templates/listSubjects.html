@@ -10,6 +10,7 @@
 </head>
 
 <body style="background-color: rgb(60, 92, 156);">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
     <div class="container">
         <table class="table">
             <thead>
@@ -32,10 +33,12 @@
                         <div th:each="day : ${subject.theoricalDays}" class="text-center" th:text="${day}"></div>
                     </td>
                     <td class="text-center">
-                        <a th:text="X" th:value="${subject.id}" class="btn btn-warning text-center mx-auto" th:href="@{/subject/update/{id}(id=${subject.id})}"></a>
+                        <a th:text="X" th:value="${subject.id}" class="btn btn-warning text-center mx-auto"
+                            th:href="@{/subject/update/{id}(id=${subject.id})}"></a>
                     </td>
                     <td class="text-center">
-                        <a th:text="X" th:value="${subject.id}" class="btn btn-danger text-center" th:href="@{/subject/delete/{id}(id=${subject.id})}"></a>
+                        <a th:text="X" th:value="${subject.id}" class="btn btn-danger text-center"
+                            th:href="@{/subject/delete/{id}(id=${subject.id})}"></a>
                     </td>
                 </tr>
             </tbody>
@@ -45,4 +48,5 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
