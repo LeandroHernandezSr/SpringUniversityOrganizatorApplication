@@ -3,6 +3,8 @@ package com.lhernandez.app.handlers;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import com.lhernandez.app.dto.TestDto;
@@ -44,6 +46,10 @@ public class TestHandler {
 
 	public List<TestDto>getAllTest(){
 		return this.service.getAllTests().stream().map(mapper::ModelToDto).toList();
+	}
+
+	public Page<TestDto>getAllTestPageable(PageRequest pageRequest){
+		return this.service.getAllTestsPageable(pageRequest).map(mapper::ModelToDto);
 	}
 	
 }

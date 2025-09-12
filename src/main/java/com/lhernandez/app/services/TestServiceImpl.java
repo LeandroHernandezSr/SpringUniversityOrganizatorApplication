@@ -3,6 +3,8 @@ package com.lhernandez.app.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.lhernandez.app.mappers.TestMapper;
@@ -43,6 +45,11 @@ public class TestServiceImpl implements ITestService{
 	@Override
 	public List<Test> getAllTests() {
 		return this.repository.findAll().stream().map(mapper::toModel).toList();
+	}
+
+	@Override
+	public Page<Test> getAllTestsPageable(PageRequest pageRequest) {
+		return this.repository.findAll(pageRequest).map(mapper::toModel);
 	}
 
 }

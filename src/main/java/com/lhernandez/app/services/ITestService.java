@@ -3,6 +3,9 @@ package com.lhernandez.app.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 import com.lhernandez.app.models.test.Test;
 
 public interface ITestService {
@@ -11,4 +14,5 @@ public interface ITestService {
 	Test update(Test test);
 	Optional<Test>getById(String id);
 	List<Test>getAllTests();
+	Page<Test>getAllTestsPageable(PageRequest pageRequest);
 }
