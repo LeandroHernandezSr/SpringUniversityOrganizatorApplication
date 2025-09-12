@@ -3,6 +3,9 @@ package com.lhernandez.app.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 import com.lhernandez.app.models.subjects.Subject;
 
 public interface ISubjectService {
@@ -10,5 +13,6 @@ public interface ISubjectService {
 	Subject update(Subject subject);
 	Optional<Subject>findSubjectById(String id);
 	void deleteSubject(Subject subject);
-	List<Subject>getAllSubjects();
+	Page<Subject>getAllSubjects(PageRequest pageRequest);
+	List<Subject>getAllSubjectsList();
 }

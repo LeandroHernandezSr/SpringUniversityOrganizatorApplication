@@ -12,37 +12,63 @@
 <body style="background-color: rgb(60, 92, 156);">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
     <div class="container">
-        <table class="table">
-            <thead>
-                <tr class="text-center">
-                    <td>Name</td>
-                    <td>Practical days</td>
-                    <td>Theorical days</td>
-                    <td>Update</td>
-                    <td>Delete</td>
-                </tr>
-            </thead>
-            <tbody th:each="subject : ${subjects}" class="table-group-divider">
-                <tr>
-                    <td th:text="${subject.name}"></td>
-                    <td>
-                        <div th:each="day : ${subject.practicalDays}" class="text-center" th:text="${day}"></div>
-                    </td>
+        <div class="card my-2">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <td>Name</td>
+                            <td>Practical days</td>
+                            <td>Theorical days</td>
+                            <td>Update</td>
+                            <td>Delete</td>
+                        </tr>
+                    </thead>
+                    <tbody th:each="subject : ${subjects}" class="table-group-divider">
+                        <tr>
+                            <td th:text="${subject.name}"></td>
+                            <td>
+                                <div th:each="day : ${subject.practicalDays}" class="text-center" th:text="${day}">
+                                </div>
+                            </td>
 
-                    <td>
-                        <div th:each="day : ${subject.theoricalDays}" class="text-center" th:text="${day}"></div>
-                    </td>
-                    <td class="text-center">
-                        <a th:text="X" th:value="${subject.id}" class="btn btn-warning text-center mx-auto"
-                            th:href="@{/subject/update/{id}(id=${subject.id})}"></a>
-                    </td>
-                    <td class="text-center">
-                        <a th:text="X" th:value="${subject.id}" class="btn btn-danger text-center"
-                            th:href="@{/subject/delete/{id}(id=${subject.id})}"></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                            <td>
+                                <div th:each="day : ${subject.theoricalDays}" class="text-center" th:text="${day}">
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <a th:text="X" th:value="${subject.id}" class="btn btn-warning text-center mx-auto"
+                                    th:href="@{/subject/update/{id}(id=${subject.id})}"></a>
+                            </td>
+                            <td class="text-center">
+                                <a th:text="X" th:value="${subject.id}" class="btn btn-danger text-center"
+                                    th:href="@{/subject/delete/{id}(id=${subject.id})}"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${subjects.first} ? 'disabled' : ''">
+                        <a class="page-link" th:href="@{/subject/list(page=0)}">First</a>
+                    </li>
+                    <li class="page-item" th:classappend="${subjects.hasPrevious()} ? '' : 'disabled'">
+                        <a class="page-link" th:href="@{/subject/list(page=${subjects.number - 1})}">Previous</a>
+                    </li>
+                    <li th:each="i : ${#numbers.sequence(0, subjects.totalPages - 1)}"
+                        th:class="${i == subjects.number} ? 'page-item active' : 'page-item'">
+                        <a class="page-link" th:href="@{/subject/list(page=${i})}" th:text="${i + 1}"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${subjects.hasNext()} ? '' : 'disabled'">
+                        <a class="page-link" th:href="@{/subject/list(page=${subjects.number + 1})}">Next</a>
+                    </li>
+                    <li class="page-item" th:classappend="${subjects.last} ? 'disabled' : ''">
+                        <a class="page-link" th:href="@{/subject/list(page=${subjects.totalPages - 1})}">Last</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

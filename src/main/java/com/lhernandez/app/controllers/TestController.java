@@ -25,7 +25,7 @@ public class TestController {
 
     @GetMapping("/form")
     public String testForm(Model model,TestDto test){
-        model.addAttribute("subjects",subjectHandler.getAllSubjects());
+        model.addAttribute("subjects",subjectHandler.getAllSubjectsList());
         model.addAttribute("test", test);
         model.addAttribute("title", "Create test");
         return "testForm";

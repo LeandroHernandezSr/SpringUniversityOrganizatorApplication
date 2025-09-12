@@ -20,7 +20,7 @@
                 <h1 th:text="${title}"></h1>
             </div>
             <div class="card-body">
-                <form th:action="@{/subject/create}" method="post" th:object="${subject}">
+                <form th:action="@{${subject.id} != null ? '/subject/update' : '/subject/create'}" method="post" th:object="${subject}">
                     <input type="hidden" name="id" th:field="*{id}">
                     <div>
                         <label for="name">Name</label>
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="py-2">
-                        <input type="submit" value="Create" class="btn btn-primary">
+                        <input type="submit" th:value="${subject.id} != null ? 'Update':'Create'" class="btn btn-primary">
                     </div>
                 </form>
             </div>
