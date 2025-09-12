@@ -1,5 +1,6 @@
 package com.lhernandez.app.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -37,6 +38,11 @@ public class TestServiceImpl implements ITestService{
 	@Override
 	public Optional<Test> getById(String id) {
 		return this.repository.findById(id).map(mapper::toModel);
+	}
+
+	@Override
+	public List<Test> getAllTests() {
+		return this.repository.findAll().stream().map(mapper::toModel).toList();
 	}
 
 }

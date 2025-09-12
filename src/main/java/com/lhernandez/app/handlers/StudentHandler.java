@@ -1,11 +1,14 @@
 package com.lhernandez.app.handlers;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 
 import org.springframework.stereotype.Component;
 
 import com.lhernandez.app.dto.StudentDto;
+import com.lhernandez.app.dto.SubjectDto;
+import com.lhernandez.app.dto.TestDto;
 import com.lhernandez.app.mappers.StudentMapper;
 import com.lhernandez.app.services.IStudentService;
 
@@ -21,6 +24,8 @@ public class StudentHandler {
 	}
 	
 	public Optional<StudentDto>createStudent(StudentDto studentDto) {
+		studentDto.setSubjects(new ArrayList<SubjectDto>());
+		studentDto.setTests(new ArrayList<TestDto>());
 		return Optional.of(studentDto)
 				.map(mapper::DtoToModel)
 				.map(service::createStudent)

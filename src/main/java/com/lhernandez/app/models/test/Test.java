@@ -2,12 +2,15 @@ package com.lhernandez.app.models.test;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.lhernandez.app.models.subjects.Subject;
 
 public class Test {
 	
 	private String id;
 	private String name;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 	private Double points;
 	private Subject subject;

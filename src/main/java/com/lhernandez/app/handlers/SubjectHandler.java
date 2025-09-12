@@ -3,6 +3,8 @@ package com.lhernandez.app.handlers;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import com.lhernandez.app.dto.SubjectDto;
@@ -22,6 +24,7 @@ public class SubjectHandler {
 	
 	
 	public SubjectDto create(SubjectDto dto) {
+		dto.setId(null);
 		return this.mapper.modelToDto(this.service.create(mapper.dtoToModel(dto)));
 	}
 	
@@ -41,7 +44,11 @@ public class SubjectHandler {
 	}
 	
 	
-	public List<SubjectDto>getAllSubjects(){
-		return this.service.getAllSubjects().stream().map(mapper::modelToDto).toList();
+	public Page<SubjectDto>getAllSubjects(PageRequest pageRequest){
+		return this.service.getAllSubjects(pageRequest).map(mapper::modelToDto);
+	}
+
+	public List<SubjectDto>getAllSubjectsList(){
+		return this.service.getAllSubjectsList().stream().map(mapper::modelToDto).toList();
 	}
 }

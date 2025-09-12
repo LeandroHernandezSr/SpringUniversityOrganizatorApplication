@@ -1,5 +1,6 @@
 package com.lhernandez.app.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.lhernandez.app.models.test.Test;
@@ -9,4 +10,5 @@ public interface ITestService {
 	void delete(Test test);
 	Test update(Test test);
 	Optional<Test>getById(String id);
+	List<Test>getAllTests();
 }

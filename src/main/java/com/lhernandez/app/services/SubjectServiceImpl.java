@@ -3,6 +3,8 @@ package com.lhernandez.app.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.lhernandez.app.mappers.SubjectMapper;
@@ -22,6 +24,7 @@ public class SubjectServiceImpl implements ISubjectService{
 
 	@Override
 	public Subject create(Subject subject) {
+		System.out.println("ID DEL SUBJECT: "+subject.getId());
 		return this.mapper.toModel(this.repository.save(this.mapper.toEntity(subject)));
 	}
 
@@ -41,7 +44,12 @@ public class SubjectServiceImpl implements ISubjectService{
 	}
 
 	@Override
-	public List<Subject> getAllSubjects() {
+	public Page<Subject> getAllSubjects(PageRequest pageRequest) {
+		return this.repository.findAll(pageRequest).map(mapper::toModel);
+	}
+
+	@Override
+	public List<Subject> getAllSubjectsList() {
 		return this.repository.findAll().stream().map(mapper::toModel).toList();
 	}
 

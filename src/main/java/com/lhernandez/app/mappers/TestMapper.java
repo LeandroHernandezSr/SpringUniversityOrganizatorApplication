@@ -38,7 +38,7 @@ public class TestMapper {
 	public Test dtoToModel(TestDto dto) {
 		Test test=new Test();
 		test.setDate(dto.getDate());
-		test.setId(dto.getId());
+		test.setId(dto.getId() != null ? dto.getId() : null);
 		test.setName(dto.getName());
 		test.setPoints(dto.getPoints());
 		test.setSubject(subjectMapper.dtoToModel(dto.getSubject()));
@@ -48,7 +48,7 @@ public class TestMapper {
 	public TestDto ModelToDto(Test test) {
 		TestDto dto=new TestDto();
 		dto.setDate(test.getDate());
-		dto.setId(test.getId());
+		dto.setId(test.getId() != null ? test.getId() : null);
 		dto.setName(test.getName());
 		dto.setPoints(test.getPoints());
 		dto.setSubject(subjectMapper.modelToDto(test.getSubject()));

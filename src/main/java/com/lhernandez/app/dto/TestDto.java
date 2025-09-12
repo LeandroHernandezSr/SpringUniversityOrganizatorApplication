@@ -2,10 +2,13 @@ package com.lhernandez.app.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class TestDto {
 
 	private String id;
 	private String name;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 	private Double points;
 	private SubjectDto subject;
