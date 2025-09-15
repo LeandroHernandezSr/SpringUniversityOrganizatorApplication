@@ -36,8 +36,6 @@ public class TestController {
 
     @PostMapping("/create")
     public String createTest(@ModelAttribute("test") TestDto test){
-        System.out.print("ID de subject: ".concat(test.getSubject().getId()));
-        System.out.print("Points: ".concat(String.valueOf(test.getPoints())));
         test.setSubject(this.subjectHandler.findById(test.getSubject().getId()).get());
         this.handler.create(test);
         return "redirect:/test/list";
@@ -54,6 +52,13 @@ public class TestController {
     public String delete(@PathVariable("id") String id){
         TestDto test=this.handler.getById(id).get();
         this.handler.delete(test);
+        return "redirect:/test/list";
+    }
+
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute("test") TestDto test){
+        this.handler.update(test);
         return "redirect:/test/list";
     }
 
